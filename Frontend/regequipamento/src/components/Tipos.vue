@@ -48,8 +48,23 @@
         },
         methods: {
 
-            eliminar( id ){
-                alert( id   );
+           async eliminar( id ){
+               await axios
+                    .delete( baseURL.baseURL + '/tipo/' + id)
+                    .then( async () => {
+                    await axios
+                        .get( baseURL.baseURL + '/tipo')
+                        .then( res => {
+                            this.tipos = res.data;
+                        })
+                        .catch ( e => {
+                            this.erros.push( e );
+                        })
+
+                })
+                .catch ( e => {
+                    this.erros.push( e );
+                })
             },
             editar( id ){
                 alert("Editar: " + id );

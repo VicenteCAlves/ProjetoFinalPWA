@@ -59,8 +59,23 @@
                 })
         },
         methods: {
-            eliminar( id ){
-                alert( id );
+           async eliminar( id ){
+               await axios
+                    .delete( baseURL.baseURL + '/emprestimo/' + id)
+                    .then( async () => {
+                    await axios
+                        .get( baseURL.baseURL + '/emprestimo')
+                        .then( res => {
+                            this.emprestimos = res.data;
+                        })
+                        .catch ( e => {
+                            this.erros.push( e );
+                        })
+
+                })
+                .catch ( e => {
+                    this.erros.push( e );
+                })
             },
             editar( id ){
                 alert("Editar: " + id );

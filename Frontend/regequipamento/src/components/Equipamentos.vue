@@ -59,8 +59,23 @@
                 })
         },
         methods: {
-            eliminar( id ) {
-                alert( id );
+            async eliminar( id ){
+               await axios
+                    .delete( baseURL.baseURL + '/equipamento/' + id)
+                    .then( async () => {
+                    await axios
+                        .get( baseURL.baseURL + '/equipamento')
+                        .then( res => {
+                            this.equipamentos = res.data;
+                        })
+                        .catch ( e => {
+                            this.erros.push( e );
+                        })
+
+                })
+                .catch ( e => {
+                    this.erros.push( e );
+                })
             },
             editar(id){
                 alert( "Editar: " + id)

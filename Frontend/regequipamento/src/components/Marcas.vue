@@ -46,7 +46,6 @@
         },
         methods: {
            async eliminar( id ){
-                alert( id );
                await axios
                     .delete( baseURL.baseURL + '/marca/' + id)
                     .then( async () => {
